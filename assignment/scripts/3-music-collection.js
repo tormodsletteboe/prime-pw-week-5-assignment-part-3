@@ -30,8 +30,23 @@ function findByArtist(strArtist){
 
 }//end findByArtist
 
-console.log('test addToCollection');
+function search(searchCriteria){
+    if(searchCriteria == undefined){
+        return collection;
+    }
+    let artistToSearchFor = searchCriteria.artist;
+    let yearToSearchFor = searchCriteria.yearPublished;
+    let foundAlbums=[];
+    for(let i =0;i<collection.length;i++){
+        if(collection[i].artist==artistToSearchFor && collection[i].yearPublished==yearToSearchFor){
+            foundAlbums.push(collection[i]);
+        }
+    }//end for loop
+    return foundAlbums;
 
+}//end search
+
+console.log('test addToCollection');
 console.log(addToCollection('Sabbath Bloody Sabbath','Black Sabbath',1973));
 console.log(addToCollection('Reload','Metallica',1997));
 console.log(addToCollection('Master of Puppets','Metallica',1986));
@@ -40,7 +55,7 @@ console.log(addToCollection('If I Know Me','Morgan Wallen',2018));
 console.log(addToCollection('Racine Carree','Stromae',2015));
 console.log(collection);
 console.log('------')
-console.log('testshowCollection');
+console.log('test showCollection');
 showCollection(collection);
 console.log('------')
 console.log('test findByArtist');
@@ -50,3 +65,15 @@ console.log('search for an artist not in collection');
 console.log(findByArtist('Donald Duck'));
 console.log('find 2 metallica albums');
 console.log(findByArtist('Metallica'));
+console.log('-------');
+console.log('test search function');
+let searchObj ={
+    artist: 'Metallica',
+    yearPublished: 1986
+};
+console.log('search for Metallica 1986');
+console.log(search(searchObj));
+console.log('test with missing search object');
+console.log(search());
+console.log('search with partial missing search object');
+console.log(search('Metallica'));
